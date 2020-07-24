@@ -1,1 +1,0 @@
-# gostack-nivel02-typescript

@@ -1,0 +1,53 @@
+## Configuração do Banco de dados POSTGRES com typeOrm ##
+
+#1 - Instalando o typeOrm e o driver do pg
+  yarn add typeorm pg
+
+#2 - Configuração do arquivo: ormconfig.json
+  {
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5433,
+    "username": "postgres",
+    "password": "docker",
+    "database": "gostack_gobarber"
+  }
+
+#3 - Arquivo de conexão com o database database/index.ts
+  import { createConnection } from 'typeorm';
+  createConnection();
+
+#4 - Importando a connecção no server.ts
+  import './database';
+
+#5 - Add config para migrations no ormconfig e script no package.json
+
+  #Adicionado o caminha de armazenamento das migrations e o diretório para criação
+  "migrations" : [
+    "./src/database/migrations/*.ts"
+  ],
+  "cli" : {
+    "migrationsDir": "./src/database/migrations"
+  }
+
+  #Adicionado um alias para executart o typeorm no package.json
+  "typeorm" : "ts-node-dev ./node_modules/typeorm/cli.js"
+
+#6 - Criando as migrations e as tabelas no Banco
+
+  #Criando as migrations
+  yarn typeorm migration:create -n CreateAppointments
+
+  #Executando as migrations
+  yarn typeorm migration:run
+
+  #Revertendo criação da migration
+  yarn typeorm migration:revert
+
+  # Visualização das migrations executadas
+  yarn typeorm migration:show
+
+  ### Observação: So pode alterar uma migration se ela ainda não foi versionada ###
+
+
+
