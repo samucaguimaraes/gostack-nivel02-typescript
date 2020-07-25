@@ -7,22 +7,32 @@ export class CreateAppointments1595583452061 implements MigrationInterface {
       await queryRunner.createTable(
         new Table({
           name: 'appointments',
-          columns: [
+          columns:
+          [
             {
               name: 'id',
               type: 'varchar',
               isPrimary: true,
               generationStrategy: 'uuid',
+              default: 'uuid_generate_v4()',
             },
             {
               name: 'provider',
               type: 'varchar',
-              isNullable: false,
             },
             {
               name: 'date',
               type: 'timestamp with time zone',
-              isNullable: false,
+            },
+            {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+            },
+            {
+              name: 'updated_at',
+              type: 'timestamp',
+              default: 'now()',
             }
           ]
         })

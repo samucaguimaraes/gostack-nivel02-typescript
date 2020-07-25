@@ -49,5 +49,25 @@
 
   ### Observação: So pode alterar uma migration se ela ainda não foi versionada ###
 
+  #07 - Alterando o Model
+
+  #Adicionar o Entity do typeorm para informar que o model referencia uma tabela no Banco
+  import { Entity } from typeorm
+
+  # Alteração do tsconfig.json - habilitando o decorator funciona apenas com TypeScript
+  # Caso não esteja usando o TS pode ser feito o mapeamento de outra forma com typeorm
+
+  "experimentalDecorators": true,
+  "emitDecoratorMetadata": true,
+
+  # Mapeamento de colunas e tabelas no model e remoção do constructor
+
+  # Resolvendo erro gerado por não incializar os atributos so model -  Alterção no tsconfig.json
+  "strictPropertyInitialization": false,
+
+  #08 - Alterando o repositorio para salvar no banco com o model
+
+
+
 
 
