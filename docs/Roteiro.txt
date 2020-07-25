@@ -67,6 +67,16 @@
 
   #08 - Alterando o repositorio para salvar no banco com o model
 
+  #09 - dicionando Relacionamentos no migration e model
+  // KISS - Keep It Simples & Stupid (Mantenha Simples e Stupid seu codigo)
+  /**
+  * Relacionamentos:
+  *
+  * Um para um (OneToOne)
+  * um para Muitos (OneToMany)
+  * Muitos para Muitos (ManyToMany)
+  */
+
 
 
 
