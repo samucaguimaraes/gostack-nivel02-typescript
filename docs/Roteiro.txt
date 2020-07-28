@@ -120,6 +120,51 @@
 
   # Com isso temos o id do usuario em todas as rotas autenticadas através do request
 
+# 14 -Upload de imagem do avatar
+  # Criando uma migration para add o campo avatar no banco
+  yarn typeorm migration:create -n AddAvatarFeldToUsers
+
+  #Criação da rota
+
+  #Middle para upload de arquivo
+  yarn add multer
+  yarn add -D @types/multer
+
+  # arquivo config/upload.ts para armazenar as configurações de upload
+    import path from 'path';
+    import multer from 'multer';
+    import crypto from 'crypto';
+
+    import { request } from 'express';
+
+
+    export default {
+      storage: multer.diskStorage({
+        destination: path.resolve(__dirname, '..','..', 'tmp'),
+        filename(request, file, callback) {
+          const fileHash = crypto.randomBytes(10).toString("hex");
+          const fileName = `${fileHash} - ${file.originalname}`;
+
+          return callback(null, fileName);
+        },
+      }),
+    };
+
+  # Criação de uma pasta tmp para armaenar os arquivos de upload
+    # criação de um arquivo .gitkeep , apenas os arquivos serão ignorados
+
+  #Criação do service para update de avatar
+
+  #Rota para exibir as imagens armazenas na pasta temp no cliente
+
+  # 15 - Classes de Erros
+    # Inclusão da tratativa de erro no server.ts
+
+    # add lib para o express conseguir reconhecer os erros das routes
+    yarn add express-async-errors
+
+
+
 
 
 

@@ -3,7 +3,8 @@ import { getRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import authConfig from '../config/auth';
-//import { hash } from 'bcryptjs'
+
+import AppError from '../erros/AppError';
 
 interface Request{
   email: string,
@@ -24,7 +25,7 @@ class AuthenticateUserService {
     const user = await usersRepository.findOne({ where: { email }});
 
     if(!user){
-      throw new Error('Incorrect email/passwordcombination ');
+      throw new AppError('Incorrect email/passwordcombination ', 401);
     }
 
     // user.password - Senha criptografada
@@ -32,7 +33,7 @@ class AuthenticateUserService {
     const passwordMatched = await compare(password, user.password);
 
     if(!passwordMatched){
-      throw new Error('Incorrect email/passwordcombination ');
+      throw new AppError('Incorrect email/passwordcombination ', 401);
     }
 
     //Desistruturação do config
