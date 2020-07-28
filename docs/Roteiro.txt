@@ -76,6 +76,54 @@
   * um para Muitos (OneToMany)
   * Muitos para Muitos (ManyToMany)
   */
+  #10 - Model de User e Serviço para criar Usuario no banco
+    /**
+     * Regras:
+     *  1- Não posso duplicar email
+     *  2- O password tem que ser criptografado
+     */
+#11 - Hash de senha para usuário
+  # Lib de criptografia
+  yarn add bcryptjs
+
+  # add types para reconhecer no typeScript
+  yarn add -D @types/bcryptjs
+
+  # add no CreateUserService a lib e implementar o hash no password
+   import { hash } from 'bcryptjs'
+   const hashedPassword = await hash(password, 8);
+
+#12 - Conceito JWT (Json Web Token)
+  Token JWT =  Headers (Tipo de TOken, algorítimo)
+              .Payload (Dados Adicionais)
+              .Assinatura do Token
+
+# Altenticação do usuário - Criação da rota session
+  # lib da JWT
+  yarn add jsonwebtoken
+  yarn add -D @types/jsonwebtoken
+
+#13 - Trabalhando com middleware
+ # Criada a middleware ensureAutheticated para validar se existe um usuário logado
+
+ # Criado um arquivo de configuração para armazenar o token e expiresIn
+
+ # Criado o @types para extender o espress e adicionar o id do user na session
+  # Arquivo: express.d.ts
+  declare namespace Express {
+    export interface Request{
+      user:{
+        id: string;
+      };
+    }
+  }
+
+  # Com isso temos o id do usuario em todas as rotas autenticadas através do request
+
+
+
+
+
 
 
 

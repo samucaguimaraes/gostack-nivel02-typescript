@@ -4,11 +4,17 @@ import { parseISO, isEqual } from 'date-fns';
 
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 import CreateAppointmentService from '../services/CreateAppointmentService';
-import Appointment from '../models/Appointment';
+
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 const appointmentesRouter = Router();
 
+//** Aplicando em todas as rotas */
+appointmentesRouter.use(ensureAuthenticated);
+
 appointmentesRouter.get('/', async (request, response) => {
+  console.log(request.user);
+
   const appointmentsRepository = getCustomRepository(AppointmentsRepository);
   const appointments = await appointmentsRepository.find();
   return response.json(appointments);
@@ -17,7 +23,7 @@ appointmentesRouter.get('/', async (request, response) => {
 appointmentesRouter.post('/', async  (request, response) => {
   try {
       // Dados do view para inserção
-      const { provider, date } = request.body;
+      const { provider_id, date } = request.body;
       //
       const parsedDate = parseISO(date);
 
@@ -25,7 +31,7 @@ appointmentesRouter.post('/', async  (request, response) => {
 
       const appointment = await createAppointment.execute({
         date: parsedDate,
-        provider
+        provider_id
       });
 
       return response.json(appointment);
