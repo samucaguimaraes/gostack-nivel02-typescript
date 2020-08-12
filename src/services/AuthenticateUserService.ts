@@ -25,7 +25,7 @@ class AuthenticateUserService {
     const user = await usersRepository.findOne({ where: { email }});
 
     if(!user){
-      throw new AppError('Incorrect email/passwordcombination ', 401);
+      throw new AppError('Incorrect email/password combination ', 401);
     }
 
     // user.password - Senha criptografada
