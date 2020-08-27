@@ -18,6 +18,8 @@ import User from './User';
  * Muitos para Muitos (ManyToMany)
  */
 
+  
+
 @Entity('appointments')
 class Appointment{
   @PrimaryGeneratedColumn('uuid')
